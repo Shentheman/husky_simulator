@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root xmlns:xacro="http://ros.org/wiki/xacro">
 
-<xacro:macro name="kinect_camera_gazebo" params="prefix">
+<xacro:macro name="kinect_camera_gazebo" params="prefix namespace_with_slash">
 
   <joint name="${prefix}_optical_joint" type="fixed">
     <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
@@ -28,6 +28,7 @@
         </clip>
       </camera>
       <plugin name="kinect_${prefix}_controller" filename="libgazebo_ros_openni_kinect.so">
+        <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
         <cameraName>${prefix}</cameraName>
         <alwaysOn>true</alwaysOn>
         <updateRate>10</updateRate>
