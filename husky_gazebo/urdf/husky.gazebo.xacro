@@ -27,13 +27,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <xacro:include filename="$(find husky_gazebo)/urdf/accessories/kinect_camera.gazebo.xacro"/>
 
-  <xacro:macro name="husky_robot_gazebo" params="namespace_with_slash">
+  <xacro:macro name="husky_robot_gazebo" params="namespace_with_slash extra_prefix">
 
     <gazebo>
       <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
         <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
         <updateRate>50.0</updateRate>
-        <bodyName>base_link</bodyName>
+        <bodyName>${extra_prefix}base_link</bodyName>
         <topicName>imu/data</topicName>
         <accelDrift>0.005 0.005 0.005</accelDrift>
         <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
@@ -49,8 +49,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
         <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
         <updateRate>40</updateRate>
         <robotNamespace>/</robotNamespace>
-        <bodyName>base_link</bodyName>
-        <frameId>base_link</frameId>
+        <bodyName>${extra_prefix}base_link</bodyName>
+        <frameId>${extra_prefix}base_link</frameId>
         <topicName>navsat/fix</topicName>
         <velocityTopicName>navsat/vel</velocityTopicName>
         <referenceLatitude>49.9</referenceLatitude>
@@ -63,31 +63,31 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   
     <xacro:if value="$(arg ur5_enabled)">
       <!--Remove when https://github.com/ros-industrial/universal_robot/pull/168 is resolved -->
-      <gazebo reference="ur5_arm_shoulder_link">
+      <gazebo reference="${extra_prefix}ur5_arm_shoulder_link">
         <selfCollide>true</selfCollide>
       </gazebo>
-      <gazebo reference="ur5_arm_upper_arm_link">
+      <gazebo reference="${extra_prefix}ur5_arm_upper_arm_link">
         <selfCollide>true</selfCollide>
       </gazebo>
-      <gazebo reference="ur5_arm_forearm_link">
+      <gazebo reference="${extra_prefix}ur5_arm_forearm_link">
         <selfCollide>true</selfCollide>
       </gazebo>
-      <gazebo reference="ur5_arm_wrist_1_link">
+      <gazebo reference="${extra_prefix}ur5_arm_wrist_1_link">
         <selfCollide>true</selfCollide>
       </gazebo>
-      <gazebo reference="ur5_arm_wrist_3_link">
+      <gazebo reference="${extra_prefix}ur5_arm_wrist_3_link">
        <selfCollide>true</selfCollide>
       </gazebo>
-      <gazebo reference="ur5_arm_wrist_2_link">
+      <gazebo reference="${extra_prefix}ur5_arm_wrist_2_link">
         <selfCollide>true</selfCollide>
       </gazebo>
-      <gazebo reference="ur5_arm_ee_link">
+      <gazebo reference="${extra_prefix}ur5_arm_ee_link">
         <selfCollide>true</selfCollide>
       </gazebo>
     </xacro:if>
 
     <xacro:if value="$(arg kinect_enabled)">
-      <xacro:kinect_camera_gazebo prefix="camera" namespace_with_slash="$(arg namespace_with_slash)" />
+      <xacro:kinect_camera_gazebo prefix="${extra_prefix}camera" namespace_with_slash="$(arg namespace_with_slash)" />
     </xacro:if>
 
   </xacro:macro>

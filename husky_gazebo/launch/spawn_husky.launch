@@ -25,13 +25,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 -->
 <launch>
 
-  <!-- <arg name="namespace_with_slash" default="/base"/>
+  <arg name="namespace_with_slash" default="/base"/>
   <arg name="namespace_without_slash" default="base"/>
-  <arg name="prefix_without_underscore" default="base"/>
- -->
-  <arg name="namespace_with_slash" default=""/>
+  <arg name="prefix_with_underscore" default="base_"/>
+
+  <!-- <arg name="namespace_with_slash" default="/"/>
   <arg name="namespace_without_slash" default=""/>
-  <arg name="prefix_without_underscore" default=""/>
+  <arg name="prefix_with_underscore" default=""/> -->
 
   <arg name="laser_enabled" default="true"/>
   <arg name="ur5_enabled" default="false"/>
@@ -41,13 +41,15 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <arg name="ur5_control_yaml_file" default="$(find husky_control)/config/control_ur5.yaml"/>
 
 
+  <!-- We need `inorder` so that the compiler can distinguish between the empty string vs no value. https://github.com/ros/xacro/issues/128 -->
+
   <!-- here for namespace_with_slash, we have to do / + namespace_without_slash to make sure there is a / even when namespace_without_slash = "" -->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find husky_gazebo)/urdf/description.gazebo.xacro'
+  <param name="robot_description" command="$(find xacro)/xacro.py --inorder '$(find husky_gazebo)/urdf/description.gazebo.xacro'
     laser_enabled:=$(arg laser_enabled)
     ur5_enabled:=$(arg ur5_enabled)
     kinect_enabled:=$(arg kinect_enabled)
     namespace_with_slash:=/$(arg namespace_without_slash)
-    prefix_without_underscore:=$(arg prefix_without_underscore)
+    prefix_with_underscore:=$(arg prefix_with_underscore)
     " />
 
 
