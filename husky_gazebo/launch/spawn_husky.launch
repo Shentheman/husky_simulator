@@ -25,13 +25,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 -->
 <launch>
 
-  <arg name="namespace_with_slash" default="/base"/>
+  <!-- <arg name="namespace_with_slash" default="/base"/>
   <arg name="namespace_without_slash" default="base"/>
   <arg name="prefix_without_underscore" default="base"/>
-
-  <!-- <arg name="namespace_with_slash" default=""/> -->
-  <!-- <arg name="namespace_without_slash" default=""/> -->
-  <!-- <arg name="prefix_without_underscore" default=""/> -->
+ -->
+  <arg name="namespace_with_slash" default=""/>
+  <arg name="namespace_without_slash" default=""/>
+  <arg name="prefix_without_underscore" default=""/>
 
   <arg name="laser_enabled" default="true"/>
   <arg name="ur5_enabled" default="false"/>
