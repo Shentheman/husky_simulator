@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="laser_enabled" default="??laser_enabled??" />
+  <arg name="ur5_enabled" default="??ur5_enabled??" />
+  <arg name="kinect_enabled" default="??kinect_enabled??" />
+  <arg name="namespace_with_slash" default="??namespace_with_slash??" />
+  <arg name="prefix_with_underscore" default="??prefix_with_underscore??" />
+
+
+  <!-- https://answers.ros.org/question/38956/pass-parameters-to-xacro-in-launch-file/ -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find husky_gazebo)/urdf/description.gazebo.xacro'
+  	laser_enabled:=$(arg laser_enabled)
+  	ur5_enabled:=$(arg ur5_enabled)
+  	kinect_enabled:=$(arg kinect_enabled)
+    namespace_with_slash:=$(arg namespace_with_slash)
+  	prefix_with_underscore:=$(arg prefix_with_underscore)
+  	" />
+</launch>
