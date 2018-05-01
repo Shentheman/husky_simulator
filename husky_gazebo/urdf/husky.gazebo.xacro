@@ -27,11 +27,12 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <xacro:include filename="$(find husky_gazebo)/urdf/accessories/kinect_camera.gazebo.xacro"/>
 
-  <xacro:macro name="husky_robot_gazebo" params="namespace_with_slash extra_prefix">
+  <xacro:macro name="husky_robot_gazebo"
+    params="namespace_with_slash extra_prefix ur5_enabled kinect_enabled">
 
     <gazebo>
       <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
-        <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
+        <robotNamespace>${namespace_with_slash}</robotNamespace>
         <updateRate>50.0</updateRate>
         <bodyName>${extra_prefix}base_link</bodyName>
         <topicName>imu/data</topicName>
@@ -46,7 +47,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
     <gazebo>
       <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
-        <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
+        <robotNamespace>${namespace_with_slash}</robotNamespace>
         <updateRate>40</updateRate>
         <robotNamespace>/</robotNamespace>
         <bodyName>${extra_prefix}base_link</bodyName>
@@ -61,7 +62,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
       </plugin>
     </gazebo>
   
-    <xacro:if value="$(arg ur5_enabled)">
+    <xacro:if value="${ur5_enabled}">
       <!--Remove when https://github.com/ros-industrial/universal_robot/pull/168 is resolved -->
       <gazebo reference="${extra_prefix}ur5_arm_shoulder_link">
         <selfCollide>true</selfCollide>
@@ -86,8 +87,8 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
       </gazebo>
     </xacro:if>
 
-    <xacro:if value="$(arg kinect_enabled)">
-      <xacro:kinect_camera_gazebo prefix="${extra_prefix}camera" namespace_with_slash="$(arg namespace_with_slash)" />
+    <xacro:if value="${kinect_enabled}">
+      <xacro:kinect_camera_gazebo prefix="${extra_prefix}camera" namespace_with_slash="${namespace_with_slash}" />
     </xacro:if>
 
   </xacro:macro>
