@@ -36,13 +36,6 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <xacro:include filename="$(find husky_description)/urdf/husky.urdf.xacro" />
   <xacro:include filename="$(find husky_gazebo)/urdf/husky.gazebo.xacro" />
 
-  <!-- Gazebo plugin for ROS Control -->
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
-    </plugin>
-  </gazebo>
-
   <xacro:husky_robot 
     extra_prefix="$(arg prefix_with_underscore)"
     laser_enabled="$(arg laser_enabled)"
@@ -56,5 +49,11 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     ur5_enabled="$(arg ur5_enabled)"
     kinect_enabled="$(arg kinect_enabled)"
     />
+
+
+  <xacro:include filename="$(find husky_gazebo)/urdf/husky.plugin.gazebo.xacro" />
+  <xacro:husky_plugin_gazebo prefix="$(arg prefix_with_underscore)" namespace_with_slash="$(arg namespace_with_slash)" />
+
+
 
 </robot>
