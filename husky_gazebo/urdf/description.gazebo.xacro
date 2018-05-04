@@ -35,6 +35,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   
   <xacro:include filename="$(find husky_description)/urdf/husky.urdf.xacro" />
   <xacro:include filename="$(find husky_gazebo)/urdf/husky.gazebo.xacro" />
+  <xacro:include filename="$(find husky_gazebo)/urdf/husky.plugin.gazebo.xacro" />
 
   <xacro:husky_robot 
     extra_prefix="$(arg prefix_with_underscore)"
@@ -51,7 +52,6 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
     />
 
 
-  <xacro:include filename="$(find husky_gazebo)/urdf/husky.plugin.gazebo.xacro" />
   <xacro:husky_plugin_gazebo prefix="$(arg prefix_with_underscore)" namespace_with_slash="$(arg namespace_with_slash)" />
 
 

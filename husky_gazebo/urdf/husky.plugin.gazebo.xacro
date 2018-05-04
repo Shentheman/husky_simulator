@@ -15,8 +15,8 @@
     <!-- Similar to raw3-6, we load [`libhwi_switch_gazebo_ros_control`](https://github.com/nikhilkalige/filter_gazebo_plugins/tree/master/cob_gazebo_ros_control) at https://github.com/Shentheman/cob_common/blob/10fa859c06a425d28ff215cdf0a167bd3f57153f/cob_description/urdf/ur_arm/ur10_arm.urdf.xacro#L22. -->
     <!-- The reason why we don't use libgazebo_ros_control is that we need a Gazebo ros control plugin for upper body and also the husky. Unfortunately, we cannot load libgazebo_ros_control twice even with different <robotNamespace>. If you load libgazebo_ros_control with robotNamespace=/body and another libgazebo_ros_control with robotNamespace=/base, then one of the body and base will not execute! So we use libhwi_switch_gazebo_ros_control which is the one raw3-6 is using. One benefit is to specify the joint_names here for each libhwi_switch_gazebo_ros_control that we have load. So here we actually load the libhwi_switch_gazebo_ros_control with /body/joint_names which we have loaded in hdms_7_7_2_gazebo/controller/joint_names.yaml. And for husky, we will load another libhwi_switch_gazebo_ros_control and also load /base/joint_names for that plugin object.  -->
     <gazebo>
-      <plugin name="$(arg prefix_with_underscore)ros_control" filename="libhwi_switch_gazebo_ros_control.so">
-        <robotNamespace>$(arg namespace_with_slash)</robotNamespace>
+      <plugin name="${prefix}ros_control" filename="libhwi_switch_gazebo_ros_control.so">
+        <robotNamespace>${namespace_with_slash}</robotNamespace>
         <filterJointsParam>joint_names</filterJointsParam>
       </plugin>
     </gazebo>
